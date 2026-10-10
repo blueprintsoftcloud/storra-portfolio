@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will Gibbins Connect — Client Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7F1;
+    --ink:#241209;
+    --teal:#C1461E;
+    --mint:#E2AC90;
+    --line:rgba(36,18,9,0.14);
+    --muted:rgba(36,18,9,0.58);
+    --display:'DM Serif Display', serif;
+    --body:'Sora', sans-serif;
+    --mono:'DM Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{overflow-x:hidden;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 64px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:44px 44px;
+    background-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+    mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  }
+  .hero-inner{
+    position:relative;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);}
+  h1{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:clamp(38px,6vw,64px);
+    line-height:1.05;
+    margin:0 0 22px;
+    max-width:14ch;
+  }
+  .hero p{
+    font-size:17px;
+    color:var(--muted);
+    max-width:52ch;
+    margin:0 0 44px;
+  }
+  .stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    border-top:1px solid var(--line);
+  }
+  .stat{
+    flex:1 1 160px;
+    padding:18px 26px 0 0;
+    border-left:1px solid var(--line);
+  }
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .num{
+    font-family:var(--display);
+    font-size:32px;
+    display:block;
+    color:var(--mint);
+  }
+  .stat .label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  /* ---------- LEGEND ---------- */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    padding:20px 0 0;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+  }
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+
+  /* ---------- COMPANY DETAILS ---------- */
+  .company-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:40px;
+  }
+  .info-rows{
+    margin-top:22px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:10px 16px;
+  }
+  .info-rows b{color:var(--ink);font-weight:500;overflow-wrap:anywhere;min-width:0;}
+  .info-rows a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal);}
+  .index-list{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:12.5px;}
+  .index-list li{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .index-list .num{color:var(--muted);width:22px;flex:none;}
+  .index-list .name{flex:1;color:var(--ink);min-width:0;}
+  .index-list a{color:var(--muted);text-decoration:none;white-space:normal;overflow-wrap:anywhere;text-align:right;min-width:0;}
+  .index-list a:hover{color:var(--teal);}
+  @media (max-width:720px){
+    .company-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section.group{padding:64px 0 8px;}
+  .group-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:30px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+  }
+  .group-head .letter{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--teal);
+    letter-spacing:.1em;
+  }
+  .group-head h2{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:26px;
+    margin:0;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(min(290px, 100%), 1fr));
+    gap:20px;
+  }
+
+  .card{
+    border:1px solid var(--line);
+    background:#fff;
+    padding:22px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    min-height:100%;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{border-color:var(--teal);box-shadow:0 6px 22px rgba(226,172,144,0.35);}
+
+  .plate{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.06em;
+    margin-bottom:12px;
+  }
+  .card h3{
+    font-family:var(--display);
+    font-weight:400;
+    font-size:21px;
+    margin:0 0 8px;
+  }
+  .card .tagline{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:12px;
+  }
+  .card .desc{
+    font-size:14.5px;
+    color:var(--muted);
+    flex-grow:1;
+    margin-bottom:18px;
+  }
+  .card-foot{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:10px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .visit{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--ink);
+    text-decoration:none;
+    white-space:nowrap;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:1px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .visit:hover{color:var(--teal);border-color:var(--teal);}
+
+  /* ---------- FOOTER / TITLE BLOCK ---------- */
+  footer{
+    margin-top:90px;
+    border-top:1px solid var(--line);
+    padding:48px 0 60px;
+  }
+  .footer-flex{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:40px;
+  }
+  .footer-note{max-width:38ch;}
+  .footer-note p{
+    font-family:var(--display);
+    font-size:22px;
+    margin:0 0 10px;
+  }
+  .footer-note a{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--teal);
+    text-decoration:none;
+    border-bottom:1px solid var(--teal);
+  }
+  .title-block{
+    border:1px solid var(--line);
+    padding:16px 20px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--muted);
+    min-width:260px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:6px 14px;
+  }
+  .title-block .mark{
+    grid-column:1 / -1;
+    margin-bottom:8px;
+  }
+  .title-block b{color:var(--ink);font-weight:500;}
+
+  @media (max-width:640px){
+    .hero{padding:64px 0 44px;}
+    .stat{flex:1 1 100%;border-left:none;border-top:1px solid var(--line);padding:14px 0 0;}
+    .stat:first-child{border-top:none;}
+    section.group{padding:44px 0 4px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow"><span class="dot"></span>Will Gibbins Connect · Blue Print Software</div>
+    <h1>From blueprint to storefront.</h1>
+    <p>Fourteen online stores shipped for founders across fashion, jewelry, beauty and beyond — every one designed and built for the customer's exact needs.</p>
+    <div class="stats">
+      <div class="stat"><span class="num">14</span><span class="label">Stores shipped</span></div>
+      <div class="stat"><span class="num">4</span><span class="label">Build stacks</span></div>
+      <div class="stat"><span class="num">4</span><span class="label">Categories</span></div>
+    </div>
+    <div class="legend">
+      <span>Built using Shopify, WordPress, Storra (our own platform), or fully custom code.</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="group" id="company">
+    <div class="group-head">
+      <span class="letter">ABOUT</span>
+      <h2>Company Details</h2>
+    </div>
+    <div class="company-grid">
+      <div>
+        <p style="font-size:15px;color:var(--muted);max-width:56ch;margin:0;">
+          Blue Print Software operates under the Will Gibbins Connect (WGC) brand, delivering web, mobile, AI/ML, cloud and IT consulting to clients worldwide — alongside our own SaaS products.
+        </p>
+        <div class="info-rows">
+          <span>STUDIO</span><b>Blue Print Software · Will Gibbins Connect (WGC)</b>
+          <span>LOCATION</span><b>Kollam, Kerala, India</b>
+          <span>EMAIL</span><b><a href="mailto:info@willgibbins.com">info@willgibbins.com</a></b>
+          <span>SERVICES</span><b>Web · Mobile · AI/ML · Cloud · IT Consulting</b>
+          <span>WEBSITES</span><b><a href="https://willgibbins.com" target="_blank" rel="noopener">willgibbins.com</a> · <a href="https://blueprintsoftware.in" target="_blank" rel="noopener">blueprintsoftware.in</a> · <a href="https://storra.in" target="_blank" rel="noopener">storra.in</a></b>
+        </div>
+      </div>
+      <div>
+        <p class="tagline" style="margin-bottom:2px;">Quick Reference — All 14 Sites</p>
+        <ul class="index-list">
+          <li><span class="num">01</span><span class="name">Panakkal Pharmacy</span><a href="https://store.bhramananthu.com" target="_blank" rel="noopener">store.bhramananthu.com</a></li>
+          <li><span class="num">02</span><span class="name">Amore Perfumes</span><a href="https://amorewebstore.com" target="_blank" rel="noopener">amorewebstore.com</a></li>
+          <li><span class="num">03</span><span class="name">Clothing Store</span><a href="https://demo.blueprintsoftware.in" target="_blank" rel="noopener">mandaramdrapes.in</a></li>
+          <li><span class="num">04</span><span class="name">Reena Sharma Designs</span><a href="https://reenasharmaofficial.com/" target="_blank" rel="noopener">reenasharmaofficial.com</a></li>
+          <li><span class="num">05</span><span class="name">Pearls &amp; Pastels</span><a href="https://pearlsandpastels.com/" target="_blank" rel="noopener">pearlsandpastels.com</a></li>
+          <li><span class="num">06</span><span class="name">Outfitque</span><a href="https://www.outfitque.com/" target="_blank" rel="noopener">outfitque.com</a></li>
+          <li><span class="num">07</span><span class="name">Qurvii</span><a href="https://qurvii.com/" target="_blank" rel="noopener">qurvii.com</a></li>
+          <li><span class="num">08</span><span class="name">CINK</span><a href="https://cink.co.in/" target="_blank" rel="noopener">cink.co.in</a></li>
+          <li><span class="num">09</span><span class="name">Pluss</span><a href="https://pluss.in/" target="_blank" rel="noopener">pluss.in</a></li>
+          <li><span class="num">10</span><span class="name">Thejas Online</span><a href="https://thejasonline.in/" target="_blank" rel="noopener">thejasonline.in</a></li>
+          <li><span class="num">11</span><span class="name">Chinkaari Collections</span><a href="https://chinkaaricollections.com/" target="_blank" rel="noopener">chinkaaricollections.com</a></li>
+          <li><span class="num">12</span><span class="name">Jhumkaa Kahaani</span><a href="https://jhumkaakahaani.com/" target="_blank" rel="noopener">jhumkaakahaani.com</a></li>
+          <li><span class="num">13</span><span class="name">AaaV</span><a href="https://aaav.in/" target="_blank" rel="noopener">aaav.in</a></li>
+          <li><span class="num">14</span><span class="name">Fehny</span><a href="https://fehny.com/" target="_blank" rel="noopener">fehny.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap" id="sections">
+  <section class="group">
+    <div class="group-head">
+      <span class="letter">SECTION A</span>
+      <h2>Built on Storra</h2>
+    </div>
+    <div class="grid">
+      <div class="card" data-plate="01">
+        <div class="plate">PLATE 01</div>
+        <h3>Panakkal Pharmacy</h3>
+        <div class="tagline">Online pharmacy</div>
+        <p class="desc">A pharmacy storefront for browsing and ordering everyday health and wellness products online.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://store.bhramananthu.com" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="02">
+        <div class="plate">PLATE 02</div>
+        <h3>Amore Perfumes</h3>
+        <div class="tagline">Fragrance &amp; perfumes</div>
+        <p class="desc">A perfume store built for scent-first shopping — browse and order fragrances online.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://amorewebstore.com" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="03">
+        <div class="plate">PLATE 03</div>
+        <h3>Clothing Store</h3>
+        <div class="tagline">Demo storefront</div>
+        <p class="desc">A clothing store demo showing a complete Storra-powered storefront, ready to adapt for any seller.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://demo.blueprintsoftware.in" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="group">
+    <div class="group-head">
+      <span class="letter">SECTION B</span>
+      <h2>Fashion &amp; Apparel</h2>
+    </div>
+    <div class="grid">
+      <div class="card" data-plate="04">
+        <div class="plate">PLATE 04</div>
+        <h3>Reena Sharma Designs</h3>
+        <div class="tagline">Resort-wear label</div>
+        <p class="desc">Bold prints and breezy silhouettes — dresses, co-ords and kaftans for sun-soaked getaways.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://reenasharmaofficial.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="05">
+        <div class="plate">PLATE 05</div>
+        <h3>Pearls &amp; Pastels</h3>
+        <div class="tagline">Ethnic-fusion womenswear</div>
+        <p class="desc">Suit sets, kurtas and co-ords — "where quality meets affordability."</p>
+        <div class="card-foot">
+          <a class="visit" href="https://pearlsandpastels.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="06">
+        <div class="plate">PLATE 06</div>
+        <h3>Outfitque</h3>
+        <div class="tagline">Streetwear</div>
+        <p class="desc">Oversized tees, crop tops and bomber jackets for bold, budget-friendly street style.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://www.outfitque.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="07">
+        <div class="plate">PLATE 07</div>
+        <h3>Qurvii</h3>
+        <div class="tagline">Curve-size womenswear</div>
+        <p class="desc">"Celebrate your curves" — silk, chiffon and georgette pieces cut for every size.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://qurvii.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="08">
+        <div class="plate">PLATE 08</div>
+        <h3>CINK</h3>
+        <div class="tagline">Contemporary womenswear</div>
+        <p class="desc">Dresses, blazer co-ords and everyday separates for the modern wardrobe.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://cink.co.in/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="09">
+        <div class="plate">PLATE 09</div>
+        <h3>Pluss</h3>
+        <div class="tagline">Plus-size fashion</div>
+        <p class="desc">"Every Size" — formal and casual wear built for comfort and confidence.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://pluss.in/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="10">
+        <div class="plate">PLATE 10</div>
+        <h3>Thejas Online</h3>
+        <div class="tagline">Family fashion</div>
+        <p class="desc">Kurtas, sarees, shirts and kidswear for the whole family, shipped from Kollam.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://thejasonline.in/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="11">
+        <div class="plate">PLATE 11</div>
+        <h3>Chinkaari Collections</h3>
+        <div class="tagline">Sarees &amp; churidars</div>
+        <p class="desc">From Banarasi drapes to soft linen churidars, rooted in tradition.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://chinkaaricollections.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="group">
+    <div class="group-head">
+      <span class="letter">SECTION C</span>
+      <h2>Jewelry</h2>
+    </div>
+    <div class="grid">
+      <div class="card" data-plate="12">
+        <div class="plate">PLATE 12</div>
+        <h3>Jhumkaa Kahaani</h3>
+        <div class="tagline">Traditional jewelry</div>
+        <p class="desc">Handcrafted jhumkas, bangles and chains — including pieces made for classical dance.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://jhumkaakahaani.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="group">
+    <div class="group-head">
+      <span class="letter">SECTION D</span>
+      <h2>Beauty &amp; Wellness</h2>
+    </div>
+    <div class="grid">
+      <div class="card" data-plate="13">
+        <div class="plate">PLATE 13</div>
+        <h3>AaaV</h3>
+        <div class="tagline">Skincare &amp; haircare</div>
+        <p class="desc">"Real Aura" — face wash, hair oil and grooming kits formulated for Indian skin and hair.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://aaav.in/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+      <div class="card" data-plate="14">
+        <div class="plate">PLATE 14</div>
+        <h3>Fehny</h3>
+        <div class="tagline">Fragrance &amp; perfumes</div>
+        <p class="desc">A perfume brand's online store — browse and shop fragrances, built for scent-first shopping.</p>
+        <div class="card-foot">
+          <a class="visit" href="https://fehny.com/" target="_blank" rel="noopener">Visit site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap footer-flex">
+    <div class="footer-note">
+      <p>Have a store in mind?</p>
+      <a href="mailto:info@willgibbins.com">info@willgibbins.com</a>
+    </div>
+    <div class="title-block">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <rect x="0.5" y="0.5" width="25" height="25" rx="7" fill="#C1461E"/>
+        <circle cx="13" cy="8.3" r="3.3" fill="#fff"/>
+        <path d="M4.5 18 C 8 11.2, 18 11.2, 21.5 18" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>STUDIO</span><b>Will Gibbins Connect</b>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
